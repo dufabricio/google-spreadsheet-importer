@@ -1,8 +1,22 @@
 package spreadsheet;
 
+import com.google.api.client.util.Lists;
+import com.google.api.services.sheets.v4.Sheets;
+import com.google.api.services.sheets.v4.model.*;
+
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 public class SheetManager {
+
+    private Sheets service;
+
+    public SheetManager(Sheets service) {
+        this.service = service;
+    }
 
     public String create(String title) throws IOException {
         Sheets service = this.service;
