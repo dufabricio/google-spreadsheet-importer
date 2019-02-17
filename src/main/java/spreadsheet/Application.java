@@ -15,6 +15,8 @@ public class Application implements CommandLineRunner {
     public static void main(String[] args) {
         LOG.info("STARTING THE APPLICATION");
         SpringApplication.run(Application.class, args);
+
+
         LOG.info("APPLICATION FINISHED");
     }
 

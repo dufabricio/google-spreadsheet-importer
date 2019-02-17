@@ -12,6 +12,8 @@
     <properties>
         <java.version>1.8</java.version>
         <lombok.version>1.16.18</lombok.version>
+        <google-api.version>1.28.0</google-api.version>
+        <google-sheets.version>v4-rev493-1.21.0</google-sheets.version>
     </properties>
 
     <parent>
@@ -21,13 +23,23 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-
     <dependencies>
 
+        <!-- google api -->
+        <dependency>
+            <groupId>com.google.api-client</groupId>
+            <artifactId>google-api-client</artifactId>
+            <version>${google-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.oauth-client</groupId>
+            <artifactId>google-oauth-client-jetty</artifactId>
+            <version>${google-api.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.google.apis</groupId>
             <artifactId>google-api-services-sheets</artifactId>
-            <version>v4-rev564-1.25.0</version>
+            <version>${google-sheets.version}</version>
         </dependency>
 
         <dependency>
