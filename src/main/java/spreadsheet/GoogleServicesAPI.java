@@ -14,20 +14,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class GoogleServicesAPI {
 
-    private static final String APPLICATION_NAME = "Google Sheets Example";
+    public static final String APPLICATION_NAME = "Google Sheets Example";
 
-    @Bean
-    public Sheets getSheetsService() throws IOException, GeneralSecurityException {
+    public Sheets getSheets() throws IOException, GeneralSecurityException {
         Credential credential = GoogleAuthorizeUtil.authorize();
         return new Sheets.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), credential).setApplicationName(APPLICATION_NAME).build();
     }
 
-    @Bean
     public Drive getDriveService() throws IOException, GeneralSecurityException {
         Credential credential = GoogleAuthorizeUtil.authorize();
         return new Drive.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), credential).setApplicationName(APPLICATION_NAME).build();
     }
-
-
 
 }

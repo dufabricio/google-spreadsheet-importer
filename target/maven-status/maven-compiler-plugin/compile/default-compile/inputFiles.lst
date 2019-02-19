@@ -1,1 +1,5 @@
-C:\Users\eduardo\IdeaProjects\sbws-google-datastudio-importer\src\main\java\net\sbwebservices\googledatastudio\Application.java
+C:\Users\eduardo\IdeaProjects\google-spreadsheet-importer\src\main\java\spreadsheet\Application.java
+C:\Users\eduardo\IdeaProjects\google-spreadsheet-importer\src\main\java\spreadsheet\GoogleServicesAPI.java
+C:\Users\eduardo\IdeaProjects\google-spreadsheet-importer\src\main\java\spreadsheet\GoogleAuthorizeUtil.java
+C:\Users\eduardo\IdeaProjects\google-spreadsheet-importer\src\main\java\spreadsheet\ShareService.java
+C:\Users\eduardo\IdeaProjects\google-spreadsheet-importer\src\main\java\spreadsheet\SheetsService.java

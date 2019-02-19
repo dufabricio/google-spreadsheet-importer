@@ -1,0 +1,6 @@
+spreadsheet\GoogleServicesAPI.class
+spreadsheet\SheetsService.class
+spreadsheet\Application.class
+spreadsheet\GoogleAuthorizeUtil.class
+spreadsheet\ShareService$1.class
+spreadsheet\ShareService.class

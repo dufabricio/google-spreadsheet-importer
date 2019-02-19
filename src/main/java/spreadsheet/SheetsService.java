@@ -1,5 +1,8 @@
 package spreadsheet;
 
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.Lists;
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.*;
@@ -7,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,14 +20,31 @@ import java.util.List;
 public class SheetsService {
 
     @Autowired
+    private GoogleServicesAPI googleServices;
+
     private Sheets service;
 
-    public SheetsService(Sheets service) {
-        this.service = service;
+    public SheetsService() throws IOException, GeneralSecurityException {
+
+    }
+    
+    private Sheets getSheetsService() {
+        if(service == null) {
+            try {
+                Credential credential = GoogleAuthorizeUtil.authorize();
+                service = googleServices.getSheets();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (GeneralSecurityException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return service;
     }
 
     public String create(String title) throws IOException {
-        Sheets service = this.service;
+        Sheets service = getSheetsService();
         // [START sheets_create]
         Spreadsheet spreadsheet = new Spreadsheet()
                 .setProperties(new SpreadsheetProperties()
@@ -39,7 +60,7 @@ public class SheetsService {
     public BatchUpdateSpreadsheetResponse batchUpdate(String spreadsheetId, String title,
                                                       String find, String replacement)
             throws IOException {
-        Sheets service = this.service;
+        Sheets service = getSheetsService();
         // [START sheets_batch_update]
         List<Request> requests = new ArrayList<>();
         // Change the spreadsheet's title.
@@ -67,7 +88,7 @@ public class SheetsService {
     }
 
     public ValueRange getValues(String spreadsheetId, String range) throws IOException {
-        Sheets service = this.service;
+        Sheets service = getSheetsService();
         // [START sheets_get_values]
         ValueRange result = service.spreadsheets().values().get(spreadsheetId, range).execute();
         int numRows = result.getValues() != null ? result.getValues().size() : 0;
@@ -78,7 +99,7 @@ public class SheetsService {
 
     public BatchGetValuesResponse batchGetValues(String spreadsheetId, List<String> _ranges)
             throws IOException {
-        Sheets service = this.service;
+        Sheets service = getSheetsService();
         // [START sheets_batch_get_values]
         List<String> ranges = Arrays.asList(
                 //Range names ...
@@ -95,7 +116,7 @@ public class SheetsService {
     public UpdateValuesResponse updateValues(String spreadsheetId, String range,
                                              String valueInputOption, List<List<Object>> _values)
             throws IOException {
-        Sheets service = this.service;
+        Sheets service = getSheetsService();
         // [START sheets_update_values]
         List<List<Object>> values = Arrays.asList(
                 Arrays.asList(
@@ -121,7 +142,7 @@ public class SheetsService {
                                                        String valueInputOption,
                                                        List<List<Object>> _values)
             throws IOException {
-        Sheets service = this.service;
+        Sheets service = getSheetsService();
         // [START sheets_batch_update_values]
         List<List<Object>> values = Arrays.asList(
                 Arrays.asList(
@@ -151,7 +172,7 @@ public class SheetsService {
     public AppendValuesResponse appendValues(String spreadsheetId, String range,
                                              String valueInputOption, List<List<Object>> _values)
             throws IOException {
-        Sheets service = this.service;
+        Sheets service = getSheetsService();
         // [START sheets_append_values]
         List<List<Object>> values = Arrays.asList(
                 Arrays.asList(
@@ -174,7 +195,7 @@ public class SheetsService {
     }
 
     public BatchUpdateSpreadsheetResponse pivotTables(String spreadsheetId) throws IOException {
-        Sheets service = this.service;
+        Sheets service = getSheetsService();
 
         // Create two sheets for our pivot table.
         List<Request> sheetsRequests = new ArrayList<>();

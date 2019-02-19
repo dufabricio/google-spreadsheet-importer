@@ -1,6 +1,5 @@
 package spreadsheet;
 
-import com.google.api.services.drive.Drive;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +18,9 @@ public class Application implements CommandLineRunner {
     @Autowired
     private SheetsService sheetsService;
 
+    @Autowired
+    private ShareService shareService;
+
     public static void main(String[] args) {
         LOG.info("STARTING THE APPLICATION");
         SpringApplication.run(Application.class, args);
@@ -34,8 +36,9 @@ public class Application implements CommandLineRunner {
         }
 
         try {
-            String response = sheetsService.create("google-spreadsheet-importer");
-            System.out.println("PLANILHA CRIADA: " + response);
+            //String response = sheetsService.create("google-spreadsheet-importer");
+            shareService.shareSpreadSheet("1uO_k2dgwLNfthn5bxoKCenxL0kx_wfE6bQ8Ra19J614");
+            //System.out.println("PLANILHA CRIADA: " + response);
 
         } catch (IOException e) {
             e.printStackTrace();
