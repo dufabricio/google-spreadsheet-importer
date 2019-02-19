@@ -18,22 +18,17 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.MemoryDataStoreFactory;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.sheets.v4.SheetsScopes;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 
+@Service
 public class GoogleAuthorizeUtil {
-    public static Credential authorize() throws IOException, GeneralSecurityException {
 
-        /*GoogleCredential.fromStream(GoogleAuthorizeUtil.class.getResourceAsStream("/client_secrets.json"));
-        InputStream in = GoogleAuthorizeUtil.class.getResourceAsStream("/client_secrets.json");
-        GoogleClientSecrets clientSecrets = GoogleClientSecrets.load(JacksonFactory.getDefaultInstance(), new InputStreamReader(in));
+    @Value("google.api.path-credentials-json")
+    private String credentialsPath;
 
-
-
-        GoogleAuthorizationCodeFlow flow = new GoogleAuthorizationCodeFlow.Builder(GoogleNetHttpTransport.newTrustedTransport(), JacksonFactory.getDefaultInstance(), clientSecrets, scopes).setDataStoreFactory(new MemoryDataStoreFactory())
-                .setAccessType("offline").build();
-        Credential credential = new AuthorizationCodeInstalledApp(flow, new LocalServerReceiver()).authorize("user");
-        return credential;*/
-
-        GoogleCredential credential = GoogleCredential.fromStream(GoogleAuthorizeUtil.class.getResourceAsStream("/client_secrets.json"));
+    public Credential authorize() throws IOException {
+        GoogleCredential credential = GoogleCredential.fromStream(GoogleAuthorizeUtil.class.getResourceAsStream(credentialsPath));
         List<String> scopes = Arrays.asList(SheetsScopes.SPREADSHEETS, DriveScopes.DRIVE);
         return credential.createScoped(scopes);
     }

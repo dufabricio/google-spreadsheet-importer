@@ -1,27 +1,11 @@
-server:
-  port: ${PORT:8080}
-  servlet-path: /system
-
 logging:
   pattern:
     console: "[%-5p] %d{yyyy-MM-dd HH:mm:ss} %c - %m%n"
     file: "[%-5p] %d{yyyy-MM-dd HH:mm:ss} %c - %m%n"
 
-tomcat:
-  ajp:
-    port: 47082
-    remoteauthentication: false
-    enabled: true
-    scheme: http
-    secure: false
-    allowtrace: false
-    protocol: AJP/1.3
-
-#Spring Boot Actuator
-#exemplo de chamada http://localhost:8080/system/actuador/health
-management:
-  security:
-    enabled: false
-  context-path: /actuador
+google:
+  api:
+    path-credentials-json: "/client_secrets.json"
+    application-name: "Google Spreadsheet Importer Example"
 
 

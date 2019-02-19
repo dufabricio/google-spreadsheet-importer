@@ -31,7 +31,6 @@ public class SheetsService {
     private Sheets getSheetsService() {
         if(service == null) {
             try {
-                Credential credential = GoogleAuthorizeUtil.authorize();
                 service = googleServices.getSheets();
             } catch (IOException e) {
                 e.printStackTrace();
