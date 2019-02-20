@@ -5,7 +5,7 @@ logging:
 
 google:
   api:
-    path-credentials-json: "/client_secrets.json"
+    path-credentials-json: "classpath:client_secrets.json"
     application-name: "Google Spreadsheet Importer Example"
     shared-accounts: "eduardo.fabricio@sbwebservices.net,thalita.souza@sbwebservices.net"
 

@@ -1,0 +1,12 @@
+logging:
+  pattern:
+    console: "[%-5p] %d{yyyy-MM-dd HH:mm:ss} %c - %m%n"
+    file: "[%-5p] %d{yyyy-MM-dd HH:mm:ss} %c - %m%n"
+
+google:
+  api:
+    path-credentials-json: "file:C:/Users/eduardo/Documents/workspace/google-spreadsheet-importer/bin/config/credentials.json"
+    application-name: "Google Spreadsheet Importer Example"
+    shared-accounts: "eduardo.fabricio@sbwebservices.net"
+
+

@@ -18,7 +18,10 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.store.MemoryDataStoreFactory;
 import com.google.api.services.drive.DriveScopes;
 import com.google.api.services.sheets.v4.SheetsScopes;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,8 +30,16 @@ public class GoogleAuthorizeUtil {
     @Value("${google.api.path-credentials-json}")
     private String credentialsPath;
 
+    @Autowired
+    private ResourceLoader resourceLoader;
+
     public Credential authorize() throws IOException {
-        GoogleCredential credential = GoogleCredential.fromStream(GoogleAuthorizeUtil.class.getResourceAsStream(credentialsPath));
+
+        System.out.println("Loading credentials from ["+credentialsPath+"]");
+        Resource resource = resourceLoader.getResource(credentialsPath);
+        InputStream resourceStream = resource.getInputStream();
+
+        GoogleCredential credential = GoogleCredential.fromStream(resourceStream);
         List<String> scopes = Arrays.asList(SheetsScopes.SPREADSHEETS, DriveScopes.DRIVE);
         return credential.createScoped(scopes);
     }

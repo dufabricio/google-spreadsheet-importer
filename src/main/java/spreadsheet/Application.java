@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @SpringBootApplication
@@ -18,6 +19,8 @@ public class Application implements CommandLineRunner {
     private int MIN_SIZE_ARGS = 2;
     private int COMMAND_POSITION = 0;
     private int COMMAND_FIRST_ARG = 1;
+    private int COMMAND_SECOND_ARG = 2;
+    private int COMMAND_THIRD_ARG = 3;
     private int HAS_ONE_ARG = 2;
     private int HAS_TWO_ARGS = 3;
 
@@ -84,11 +87,10 @@ public class Application implements CommandLineRunner {
 
         try {
 
-            String spreadsheetId = args[1];
-            String csvPath = args[2];
+            String spreadsheetId = args[COMMAND_SECOND_ARG];
+            String csvPath = args[COMMAND_THIRD_ARG];
             List<List<Object>> values = csvReader.getValuesFromCsv(csvPath);
             AppendValuesResponse response = sheetsService.appendValues(spreadsheetId, "A1:A1000","RAW",values);
-            System.out.println(response);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -101,9 +103,17 @@ public class Application implements CommandLineRunner {
 
         try {
 
-            if(args.length == HAS_ONE_ARG) {
-                String response = sheetsService.create(args[COMMAND_FIRST_ARG]);
-                shareService.shareSpreadSheet(response);
+            if(args.length >= HAS_ONE_ARG) {
+                String spreadsheetId = sheetsService.create(args[COMMAND_FIRST_ARG]);
+                shareService.shareSpreadSheet(spreadsheetId);
+
+                // check colums headers
+                if(args.length >= HAS_TWO_ARGS) {
+                    List values = new ArrayList();
+                    values.add(Arrays.asList(args[COMMAND_SECOND_ARG].split(";")));
+                    AppendValuesResponse response = sheetsService.appendValues(spreadsheetId, "A1:A1000","RAW",values);
+                }
+
             }else{
                 printHelp(CMD_NEW_SHEET);
             }

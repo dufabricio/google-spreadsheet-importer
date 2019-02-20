@@ -19,6 +19,23 @@ This app could be used for automate fill daily a spreadsheet from resultset of s
 
 
 
+## Usage
 
 
+1. Create new Sheet ( command, sheetname, headers with ";" separator )
 
+```
+java -jar google-spreadsheet-importer-1.0.RELEASE.jar new-sheet teste-google-api004 "Data;Ano;Mês;Dia;Cadastros;Total;Cadastros Ativos;Habilitações Total;Lances Total;Leilões;Lotes Ofertados"
+```
+
+2. import CSV file to existent Sheet ( command, spreadsheetId returned from new-sheet, csvpath )
+
+```
+java -jar google-spreadsheet-importer-1.0.RELEASE.jar import-csv 14GUxKBspV0MF_7A4zmkYflX8TqLdbYyk4w9eELEhUKI C:\Users\eduardo\Documents\workspace\google-spreadsheet-importer\accounts-sample.csv
+```
+
+3. append a row to existent sheet ( command, spreadsheetId returned from new-sheet, values with ";" separator )
+
+```
+java -jar google-spreadsheet-importer-1.0.RELEASE.jar append-row 14GUxKBspV0MF_7A4zmkYflX8TqLdbYyk4w9eELEhUKI "20180104;2018;jan;4;163;68;453;508;93;4.059"
+```
