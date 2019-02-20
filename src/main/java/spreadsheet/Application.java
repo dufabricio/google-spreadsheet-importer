@@ -44,7 +44,6 @@ public class Application implements CommandLineRunner {
             if(args.length >= MIN_SIZE_ARGS && args[COMMAND_FIRST_ARG].equals("--help")) {
                 printHelp(args[COMMAND_POSITION]);
             }else {
-
                 if (routeCommand("new-sheet",args)) {
                     runCommandNewSheet(args);
                 }else if (routeCommand("import-csv",args)) {
@@ -84,7 +83,12 @@ public class Application implements CommandLineRunner {
     }
 
     private boolean routeCommand(String command, String... args){
-        return (args.length >= 3 && command.equals(args[COMMAND_POSITION]));
+        String argsDesc = "";
+        for(Object arg:args){
+            argsDesc=argsDesc+arg.toString();
+        }
+        System.out.println("command:" + command + " args:" + argsDesc);
+        return (args.length >= MIN_SIZE_ARGS && command.equals(args[COMMAND_POSITION]));
     }
 
     private void printManual() {
