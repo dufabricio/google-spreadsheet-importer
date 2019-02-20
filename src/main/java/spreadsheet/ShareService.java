@@ -7,10 +7,12 @@ import com.google.api.client.http.HttpHeaders;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.model.Permission;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.Arrays;
 
 @Service
 public class ShareService {
@@ -19,6 +21,9 @@ public class ShareService {
     private GoogleServicesAPI googleServices;
 
     private Drive driveService;
+
+    @Value("${google.api.shared-accounts}")
+    private String[] sharedAccounts;
 
     public ShareService() {
 
@@ -58,13 +63,18 @@ public class ShareService {
         };
 
         BatchRequest batch = getDriveService().batch();
-        Permission userPermission = new Permission()
-                .setType("user")
-                .setRole("writer")
-                .setEmailAddress("eduardo.fabricio@sbwebservices.net");
-        getDriveService().permissions().create(fileId, userPermission)
-                .setFields("id")
-                .queue(batch, callback);
+
+        for(String account: Arrays.asList(sharedAccounts)){
+
+            Permission userPermission = new Permission()
+                    .setType("user")
+                    .setRole("writer")
+                    .setEmailAddress(account);
+
+            getDriveService().permissions().create(fileId, userPermission)
+                    .setFields("id")
+                    .queue(batch, callback);
+        }
 
         batch.execute();
     }

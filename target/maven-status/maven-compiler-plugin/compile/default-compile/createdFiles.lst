@@ -1,3 +1,5 @@
+spreadsheet\CSVReader.class
+spreadsheet\WrongCommandSintaxException.class
 spreadsheet\GoogleServicesAPI.class
 spreadsheet\SheetsService.class
 spreadsheet\Application.class

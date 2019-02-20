@@ -24,7 +24,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class GoogleAuthorizeUtil {
 
-    @Value("google.api.path-credentials-json")
+    @Value("${google.api.path-credentials-json}")
     private String credentialsPath;
 
     public Credential authorize() throws IOException {

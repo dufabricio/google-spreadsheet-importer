@@ -19,7 +19,7 @@ public class GoogleServicesAPI {
     @Autowired
     private GoogleAuthorizeUtil googleAuthorizeUtil;
 
-    @Value("google.api.application-name")
+    @Value("${google.api.application-name}")
     public String APPLICATION_NAME;
 
     public Sheets getSheets() throws IOException, GeneralSecurityException {
