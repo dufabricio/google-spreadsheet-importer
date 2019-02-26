@@ -1,4 +1,4 @@
-package spreadsheet;
+package dufabricio.googlespreadsheet;
 
 import java.io.IOException;
 import java.io.InputStream;

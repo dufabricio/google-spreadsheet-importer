@@ -1,4 +1,4 @@
-package spreadsheet;
+package dufabricio.googlespreadsheet;
 
 import com.google.api.client.googleapis.batch.BatchRequest;
 import com.google.api.client.googleapis.batch.json.JsonBatchCallback;

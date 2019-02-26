@@ -1,4 +1,4 @@
-package spreadsheet;
+package dufabricio.googlespreadsheet;
 
 import org.springframework.stereotype.Component;
 

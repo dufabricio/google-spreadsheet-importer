@@ -1,4 +1,4 @@
-package spreadsheet;
+package dufabricio.googlespreadsheet;
 
 import com.google.api.services.sheets.v4.model.AppendValuesResponse;
 import org.slf4j.Logger;

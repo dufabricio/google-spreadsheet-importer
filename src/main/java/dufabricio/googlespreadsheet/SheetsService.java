@@ -1,4 +1,4 @@
-package spreadsheet;
+package dufabricio.googlespreadsheet;
 
 import com.google.api.client.util.Lists;
 import com.google.api.services.sheets.v4.Sheets;
