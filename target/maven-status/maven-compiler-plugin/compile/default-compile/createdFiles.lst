@@ -1,8 +1,8 @@
-spreadsheet\CSVReader.class
-spreadsheet\WrongCommandSintaxException.class
-spreadsheet\GoogleServicesAPI.class
-spreadsheet\SheetsService.class
-spreadsheet\Application.class
-spreadsheet\GoogleAuthorizeUtil.class
-spreadsheet\ShareService$1.class
-spreadsheet\ShareService.class
+dufabricio\googlespreadsheet\GoogleAuthorizeUtil.class
+dufabricio\googlespreadsheet\Application.class
+dufabricio\googlespreadsheet\ShareService$1.class
+dufabricio\googlespreadsheet\WrongCommandSintaxException.class
+dufabricio\googlespreadsheet\GoogleServicesAPI.class
+dufabricio\googlespreadsheet\SheetsService.class
+dufabricio\googlespreadsheet\ShareService.class
+dufabricio\googlespreadsheet\CSVReader.class
