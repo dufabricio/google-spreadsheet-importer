@@ -134,6 +134,45 @@ public class SheetsService {
         return result;
     }
 
+    public ClearValuesResponse clearRange(String spreadsheetId, String range)
+            throws IOException {
+        Sheets service = getSheetsService();
+
+        ClearValuesRequest requestBody = new ClearValuesRequest();
+        Sheets.Spreadsheets.Values.Clear request = service.spreadsheets().values().clear(spreadsheetId,range,requestBody);
+        ClearValuesResponse clearResponse = request.execute();
+
+        return clearResponse;
+    }
+
+
+    public ValueRange getValueRange(String spreadsheetId, String range,
+                                             String valueInputOption, List<List<Object>> _values)
+            throws IOException {
+        Sheets service = getSheetsService();
+
+        // How values should be represented in the output.
+        // The default render option is ValueRenderOption.FORMATTED_VALUE.
+        String valueRenderOption = ""; // TODO: Update placeholder value.
+
+        // How dates, times, and durations should be represented in the output.
+        // This is ignored if value_render_option is
+        // FORMATTED_VALUE.
+        // The default dateTime render option is [DateTimeRenderOption.SERIAL_NUMBER].
+        String dateTimeRenderOption = ""; // TODO: Update placeholder value.
+
+        Sheets.Spreadsheets.Values.Get request = service.spreadsheets().values().get(spreadsheetId, range);
+        request.setValueRenderOption(valueRenderOption);
+        request.setDateTimeRenderOption(dateTimeRenderOption);
+
+        ValueRange response = request.execute();
+
+        // TODO: Change code below to process the `response` object:
+        System.out.println(response);
+        return response;
+
+    }
+
     public BatchUpdateValuesResponse batchUpdateValues(String spreadsheetId, String range,
                                                        String valueInputOption,
                                                        List<List<Object>> _values)
